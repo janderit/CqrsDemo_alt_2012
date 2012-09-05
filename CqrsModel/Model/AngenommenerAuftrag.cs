@@ -40,6 +40,7 @@ namespace CqrsModel.Model
         }
 
         private string Lieferanschrift { get { return Konzepte.Auftrag.Lieferanschrift(Historie); } }
+        private int AnzahlOffenerZeilen { get { return Konzepte.Auftrag.AnzahlOffenerZeilen(Historie); } }
 
         private Auftragszeile Zeile(Guid id)
         {
@@ -52,7 +53,9 @@ namespace CqrsModel.Model
 
         public void Disponiere(Guid zeileid, int menge, Func<Guid, Produkt> produkte)
         {
+            if (menge==0) return;
             Zeile(zeileid).Disponiere(menge, produkte, Publish);
+            if (AnzahlOffenerZeilen == 0) Publish(new AuftragWurdeAbgeschlossen {AuftragId = Id});
         }
     }
 

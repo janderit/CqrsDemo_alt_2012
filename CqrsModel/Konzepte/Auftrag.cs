@@ -17,6 +17,18 @@ namespace CqrsModel.Konzepte
                    ?? "";
         }
 
+        public static int AnzahlOffenerZeilen(IEnumerable<Event> history)
+        {
+            var zeilen = history.OfType<AuftragWurdeAngenommen>().Single().Zeilen;
+
+            return zeilen.Count(z => IstOffen(z, history));
+        }
+
+        private static bool IstOffen(Zeile zeile, IEnumerable<Event> history)
+        {
+            return history.OfType<AuftragWurdeTeildisponiert>().Where(_ => _.ZeileId == zeile.Id).Sum(_ => _.Menge) != zeile.Menge;
+        }
+
         public static Auftragsstatus Status(IEnumerable<Event> history)
         {
             return history.OfType<AuftragWurdeAbgeschlossen>().Select(_ => (Auftragsstatus?) Auftragsstatus.Abgeschlossen).LastOrDefault()

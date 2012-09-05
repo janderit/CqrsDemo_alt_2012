@@ -30,7 +30,17 @@ namespace CqrsModel.Cqrs
 
         public static TAggregat Create(Guid id)
         {
-            return Get(id);
+            var store = DiContainer.Current.Store;
+
+            var aggregat = new TAggregat();
+            aggregat.SetHook(e =>
+            {
+                UnitOfWork.OnCommit(() => store.Store(e));
+            },
+                             UnitOfWork.OnCommit
+                );
+            aggregat.SetHistory(id, new List<Event>());
+            return aggregat;
         }
     }
 }

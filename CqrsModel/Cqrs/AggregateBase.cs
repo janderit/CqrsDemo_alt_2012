@@ -14,7 +14,6 @@ namespace CqrsModel.Cqrs
         public AggregateBase()
         {
             Id = Guid.NewGuid();
-            Publish = e => { };
         }
 
         public void SetHistory(Guid aggregateId, IEnumerable<Event> events)
@@ -24,13 +23,19 @@ namespace CqrsModel.Cqrs
             _events = events.ToList();
         }
 
-        protected Action<Event> Publish  { get; private set; }
+        protected void Publish(Event e)
+        {
+            _events.Add(e);
+            _publishHook(e);
+        }
+
+        private Action<Event> _publishHook = e => { };
 
         public void SetHook(Action<Event> publisher, Action<Action> external)
         {
             if (publisher == null) throw new ArgumentNullException("publisher");
             if (external == null) throw new ArgumentNullException("external");
-            Publish = publisher;
+            _publishHook = publisher;
             Seiteneffekt = external;
         }
 
