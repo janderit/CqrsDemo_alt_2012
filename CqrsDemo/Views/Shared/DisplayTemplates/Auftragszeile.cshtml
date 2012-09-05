@@ -1,0 +1,22 @@
+﻿@model CqrsModel.Projektionen.Auftragszeile
+
+@{
+    ViewBag.Title = "Zeile";
+}
+
+<tr>
+    <td>@Html.DisplayFor(m=>m.Produkt.Bezeichnung)</td>
+    <td>@Html.DisplayFor(m=>m.Menge)</td>
+    <td>@Html.DisplayFor(m=>m.Produkt.Lagerbestand)</td>
+    <td>@Html.DisplayFor(m=>m.Produkt.ImZulauf)</td>
+    <td>@Html.DisplayFor(m=>m.Produkt.Verkaufspreis)</td>
+    <td>@Html.Raw((Model.Produkt.Verkaufspreis*Model.Menge).ToString())</td>
+    @if ((bool)ViewBag.Modifizierbar)
+    {
+        <td>@Html.ActionLink("löschen", "EditDelZeile", "Auftraege", new { auftrag = ViewBag.Auftrag.Id, zeile = Model.ZeileId }, "")</td>
+    }
+    else
+    {
+        <td></td>
+    }
+</tr>

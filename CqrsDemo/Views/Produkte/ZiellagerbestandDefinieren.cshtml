@@ -1,0 +1,38 @@
+﻿@using System.Web.Optimization
+@model CqrsModel.Commands.ZiellagerbestandDefinieren
+
+@{
+    ViewBag.Title = "ZiellagerbestandDefinieren";
+}
+
+<h2>ZiellagerbestandDefinieren</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>ZiellagerbestandDefinieren</legend>
+
+            @Html.HiddenFor(model => model.ProduktId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Zielbestand)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Zielbestand)
+            @Html.ValidationMessageFor(model => model.Zielbestand)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

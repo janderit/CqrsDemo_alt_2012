@@ -1,0 +1,36 @@
+﻿@model CqrsModel.Commands.WareneingangVerbuchen
+
+@{
+    ViewBag.Title = "Wareneingang";
+}
+
+<h2>Wareneingang</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>WareneingangVerbuchen</legend>
+
+        @Html.HiddenFor(model => model.ProduktId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Menge)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Menge)
+            @Html.ValidationMessageFor(model => model.Menge)
+        </div>
+
+        <p>
+            <input type="submit" value="Verbuchen" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,41 @@
+﻿@using CqrsModel.Projektionen
+@model CqrsModel.Commands.AuftragZeileHinzufuegen
+
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Html.BeginForm("EditAddZeile","Auftraege")) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Neue Position</legend>
+
+            @Html.HiddenFor(model => model.AuftragId)
+            @Html.HiddenFor(model => model.ZeileId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProduktId)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model=>model.ProduktId, ((IEnumerable<Produkt>)ViewBag.Produkte).Select(_=>new SelectListItem{Text=_.Bezeichnung, Value=_.Id.ToString(), Selected = Model.ProduktId==_.Id}))
+            @Html.ValidationMessageFor(model => model.ProduktId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Menge)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Menge)
+            @Html.ValidationMessageFor(model => model.Menge)
+        </div>
+
+        <p>
+            <input type="submit" value="Hinzufuegen" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

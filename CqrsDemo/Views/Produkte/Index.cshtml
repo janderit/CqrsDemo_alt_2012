@@ -1,0 +1,55 @@
+﻿@model IEnumerable<CqrsModel.Projektionen.Produkt>
+
+@{
+    ViewBag.Title = "Produktliste";
+}
+
+<h2>Produktliste</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Bezeichnung)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Lagerbestand)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImZulauf)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Verkaufspreis)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bezeichnung)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lagerbestand)/@Html.DisplayFor(modelItem => item.Ziellagerbestand)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ImZulauf)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Verkaufspreis)
+        </td>
+        <td>
+            @Html.ActionLink("Bestellen", "Bestellen", new { id = item.Id }) 
+@if (item.ImZulauf > 0)
+{
+    @Html.ActionLink("| Wareneingang", "Wareneingang", new {id = item.Id, menge = item.ImZulauf})
+}
+@Html.ActionLink("| Zielbestand", "ZiellagerbestandDefinieren", new {id = item.Id})
+@Html.ActionLink("| VK", "VerkaufspreisVorgeben", new {id = item.Id})
+        </td>
+    </tr>
+}
+
+</table>

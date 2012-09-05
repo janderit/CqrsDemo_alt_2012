@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{84ACCF40-C612-4413-BAD3-C376B6792B41}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CqrsModel</RootNamespace>
+    <AssemblyName>CqrsModel</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentAssertions">
+      <HintPath>..\packages\FluentAssertions.2.0.0-beta\Lib\net40\FluentAssertions.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.6.1.12217, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NUnit.2.6.1\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commands\AuftragAnnehmen.cs" />
+    <Compile Include="Commands\AuftragErfassen.cs" />
+    <Compile Include="Commands\AuftragsdatenBearbeiten.cs" />
+    <Compile Include="Commands\AuftragStornieren.cs" />
+    <Compile Include="Commands\AuftragZeileEntfernen.cs" />
+    <Compile Include="Commands\AuftragZeileHinzufuegen.cs" />
+    <Compile Include="Commands\KundeErfassen.cs" />
+    <Compile Include="Commands\KundenAnschriftAendern.cs" />
+    <Compile Include="Commands\LieferungDisponieren.cs" />
+    <Compile Include="Commands\ProduktDefinieren.cs" />
+    <Compile Include="Commands\VerkaufspreisVorgeben.cs" />
+    <Compile Include="Commands\WareneingangVerbuchen.cs" />
+    <Compile Include="Commands\WarenlieferungBestellen.cs" />
+    <Compile Include="Commands\ZiellagerbestandDefinieren.cs" />
+    <Compile Include="Cqrs\EventSourcedAggregate.cs" />
+    <Compile Include="Cqrs\Command.cs" />
+    <Compile Include="Cqrs\DocumentBasedRepository.cs" />
+    <Compile Include="Cqrs\DocumentStore.cs" />
+    <Compile Include="Cqrs\Event.cs" />
+    <Compile Include="Cqrs\EventEnvelope.cs" />
+    <Compile Include="Cqrs\EventStore.cs" />
+    <Compile Include="Cqrs\AggregateBase.cs" />
+    <Compile Include="Cqrs\EventStoreDatabase.cs" />
+    <Compile Include="Cqrs\EventSourcedRepository.cs" />
+    <Compile Include="Cqrs\DocumentBasedAggregate.cs" />
+    <Compile Include="Cqrs\Repository.cs" />
+    <Compile Include="Cqrs\UnitOfWork.cs" />
+    <Compile Include="DiContainer.cs" />
+    <Compile Include="Events\AuftragWurdeAbgeschlossen.cs" />
+    <Compile Include="Events\AuftragWurdeAngenommen.cs" />
+    <Compile Include="Events\BestellungBeiLieferantGetaetigt.cs" />
+    <Compile Include="Events\AuftragWurdeTeildisponiert.cs" />
+    <Compile Include="Events\KundenAnschriftWurdeGeaendert.cs" />
+    <Compile Include="Events\KundeWurdeErfasst.cs" />
+    <Compile Include="Events\ProduktWurdeAusgeliefert.cs" />
+    <Compile Include="Events\ProduktWurdeDefiniert.cs" />
+    <Compile Include="Events\VerkaufspreisWurdeFestgesetzt.cs" />
+    <Compile Include="Events\WarenlieferungGingEin.cs" />
+    <Compile Include="Events\ZiellagerBestandWurdeGeaendert.cs" />
+    <Compile Include="Konzepte\Auftrag.cs" />
+    <Compile Include="Konzepte\Kunde.cs" />
+    <Compile Include="Konzepte\Produkt.cs" />
+    <Compile Include="Model\Auftrag.cs" />
+    <Compile Include="Model\Auftragsentwurf.cs" />
+    <Compile Include="Konfiguration\CommandDispatcher.cs" />
+    <Compile Include="Konfiguration\CommandDispatcher.Kunde.cs" />
+    <Compile Include="Konfiguration\CommandDispatcher.Produkt.cs" />
+    <Compile Include="Konfiguration\CommandDispatcher.Auftrag.cs" />
+    <Compile Include="Model\AngenommenerAuftrag.cs" />
+    <Compile Include="Model\Auftragsrepository.cs" />
+    <Compile Include="Model\Auftragszeile.cs" />
+    <Compile Include="Model\Kunde.cs" />
+    <Content Include="Model\Produkt.cs.txt" />
+    <Compile Include="Model\Produkt.cs" />
+    <Compile Include="Projektionen\AngenommenerAuftrag.cs" />
+    <Compile Include="Projektionen\Auftrag.cs" />
+    <Compile Include="Projektionen\Auftragsentwurf.cs" />
+    <Compile Include="Projektionen\Auftragsstatus.cs" />
+    <Compile Include="Projektionen\Auftragszeile.cs" />
+    <Compile Include="Projektionen\Kunde.cs" />
+    <Compile Include="Projektionen\Produkt.cs" />
+    <Compile Include="Projektionen\Readmodel.cs" />
+    <Compile Include="Projektionen\Projektor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\Kunde\Kundenverwaltung.cs" />
+    <Compile Include="Tests\TestBase.cs" />
+    <Compile Include="Tests\Warenwirtschaft\Warenbestellung.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Dispositionsschnittstelle\Dispositionsschnittstelle.csproj">
+      <Project>{B1E6430F-D5D9-4B34-93A4-B1A7FC502807}</Project>
+      <Name>Dispositionsschnittstelle</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

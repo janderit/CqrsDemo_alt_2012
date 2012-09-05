@@ -1,0 +1,49 @@
+﻿@model IEnumerable<CqrsDemo.Models.LogLine>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Lfd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Zeit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Source)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Version)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ereignis)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lfd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Zeit)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Source)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Version)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ereignis)
+        </td>
+
+    </tr>
+}
+
+</table>

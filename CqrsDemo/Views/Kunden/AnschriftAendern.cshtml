@@ -1,0 +1,37 @@
+﻿@model CqrsModel.Commands.KundenAnschriftAendern
+
+@{
+    ViewBag.Title = "AnschriftAendern";
+}
+
+<h2>AnschriftAendern</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>KundenAnschriftAendern</legend>
+
+        
+            @Html.HiddenFor(model => model.KundeId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Anschrift)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Anschrift)
+            @Html.ValidationMessageFor(model => model.Anschrift)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

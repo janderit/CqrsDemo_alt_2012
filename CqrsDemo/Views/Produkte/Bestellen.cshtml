@@ -1,0 +1,44 @@
+﻿@model CqrsModel.Commands.WarenlieferungBestellen
+
+@{
+    ViewBag.Title = "Bestellen";
+}
+
+<h2>Bestellen</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>WarenlieferungBestellen</legend>
+
+            @Html.HiddenFor(model => model.ProduktId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Menge)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Menge)
+            @Html.ValidationMessageFor(model => model.Menge)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Einkaufspreis)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Einkaufspreis)
+            @Html.ValidationMessageFor(model => model.Einkaufspreis)
+        </div>
+
+        <p>
+            <input type="submit" value="Bestellen" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

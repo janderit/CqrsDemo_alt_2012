@@ -1,0 +1,50 @@
+﻿@model CqrsModel.Commands.ProduktDefinieren
+
+@{
+    ViewBag.Title = "Neues Produkt";
+}
+
+<h2>Neues Produkt</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>ProduktDefinieren</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Bezeichnung)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Bezeichnung)
+            @Html.ValidationMessageFor(model => model.Bezeichnung)
+        </div>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Zielbestand)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Zielbestand)
+            @Html.ValidationMessageFor(model => model.Zielbestand)
+        </div>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Verkaufspreis)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Verkaufspreis)
+            @Html.ValidationMessageFor(model => model.Verkaufspreis)
+        </div>
+
+        <p>
+            <input type="submit" value="Erfassen" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,51 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using CqrsModel.Cqrs;
+using CqrsModel.Events;
+
+namespace CqrsModel.Model
+{
+    public class Produkt : EventSourcedAggregate
+    {
+        private List<Event> _events;
+        private Guid _id;
+
+        public Produkt()
+        {
+            _id = Guid.NewGuid();
+        }
+
+        private bool VerkaufspreisDefiniert { get { return Konzepte.Produkt.Verkaufspreis(_events).HasValue; } }
+        private int Verkaufspreis { get { return Konzepte.Produkt.Verkaufspreis(_events).Value; } }
+
+        private int Bestand { get { return Konzepte.Produkt.Bestand(_events); } }
+        private int ZielBestand { get { return Konzepte.Produkt.ZielBestand(_events); } }
+
+        public void PruefeNachbestellungen(int angebotspreis)
+        {
+            if (Bestand < ZielBestand)
+                if (VerkaufspreisDefiniert && Verkaufspreis > angebotspreis)
+                    DoNachbestellen(angebotspreis, ZielBestand - Bestand);
+        }
+
+        private void DoNachbestellen(int angebotspreis, int menge)
+        {
+            Publish(new BestellungBeiLieferantGetaetigt {ProduktId = _id, Menge = menge, Einkaufspreis = angebotspreis});
+        }
+
+
+        public void SetHistory(Guid aggregateId, IEnumerable<Event> events)
+        {
+            _id = aggregateId;
+            _events = events.ToList();
+        }
+
+        private Action<Event> Publish=e=> { };
+        public void SetHook(Action<Event> publisher)
+        {
+            Publish = publisher;
+        }
+    }
+}
