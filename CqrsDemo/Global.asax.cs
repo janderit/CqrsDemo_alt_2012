@@ -50,8 +50,6 @@ namespace CqrsDemo
 
         private void GenerateDemoData(EventStore store)
         {
-            store.Store(Produkt(Guid.NewGuid(), "Äpfel, KL. I", 1000, 28, 39));
-            store.Store(Produkt(Guid.NewGuid(), "Äpfel, KL. II", 2500, 21, 29));
             store.Store(Kunde(Guid.NewGuid(), "Mustermann, Hans", "Bergstrasse 10, 91000 Allgäu"));
             store.Store(Kunde(Guid.NewGuid(), "Müller, Maria", "Dorfplatz 1, 64001 Bergstraße"));
         }
@@ -61,14 +59,7 @@ namespace CqrsDemo
             yield return new KundeWurdeErfasst {KundeId = id, Name = name, Anschrift = anschrift};
         }
 
-        private IEnumerable<Event> Produkt(Guid id, string bezeichnung, int menge, int ek, int vk)
-        {
-            yield return new ProduktWurdeDefiniert {ProduktId = id, Bezeichnung = bezeichnung};
-            yield return new ZiellagerBestandWurdeGeaendert() {ProduktId = id, Zielbestand = menge};
-            yield return new VerkaufspreisWurdeFestgesetzt {ProduktId = id, Verkaufspreis = vk};
-            yield return new BestellungBeiLieferantGetaetigt {ProduktId = id, Menge = menge, Einkaufspreis = ek};
-            yield return new WarenlieferungGingEin {ProduktId = id, Menge = menge};
-        }
+        
 
     }
 }

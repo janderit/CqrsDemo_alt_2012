@@ -49,20 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\AuftragAnnehmen.cs" />
-    <Compile Include="Commands\AuftragErfassen.cs" />
-    <Compile Include="Commands\AuftragsdatenBearbeiten.cs" />
-    <Compile Include="Commands\AuftragStornieren.cs" />
-    <Compile Include="Commands\AuftragZeileEntfernen.cs" />
-    <Compile Include="Commands\AuftragZeileHinzufuegen.cs" />
     <Compile Include="Commands\KundeErfassen.cs" />
     <Compile Include="Commands\KundenAnschriftAendern.cs" />
-    <Compile Include="Commands\LieferungDisponieren.cs" />
-    <Compile Include="Commands\ProduktDefinieren.cs" />
-    <Compile Include="Commands\VerkaufspreisVorgeben.cs" />
-    <Compile Include="Commands\WareneingangVerbuchen.cs" />
-    <Compile Include="Commands\WarenlieferungBestellen.cs" />
-    <Compile Include="Commands\ZiellagerbestandDefinieren.cs" />
     <Compile Include="Cqrs\EventSourcedAggregate.cs" />
     <Compile Include="Cqrs\Command.cs" />
     <Compile Include="Cqrs\DocumentBasedRepository.cs" />
@@ -77,26 +65,13 @@
     <Compile Include="Cqrs\Repository.cs" />
     <Compile Include="Cqrs\UnitOfWork.cs" />
     <Compile Include="DiContainer.cs" />
-    <Compile Include="Events\AuftragWurdeAbgeschlossen.cs" />
-    <Compile Include="Events\AuftragWurdeAngenommen.cs" />
-    <Compile Include="Events\BestellungBeiLieferantGetaetigt.cs" />
-    <Compile Include="Events\AuftragWurdeTeildisponiert.cs" />
     <Compile Include="Events\KundenAnschriftWurdeGeaendert.cs" />
     <Compile Include="Events\KundeWurdeErfasst.cs" />
-    <Compile Include="Events\ProduktWurdeAusgeliefert.cs" />
-    <Compile Include="Events\ProduktWurdeDefiniert.cs" />
-    <Compile Include="Events\VerkaufspreisWurdeFestgesetzt.cs" />
-    <Compile Include="Events\WarenlieferungGingEin.cs" />
-    <Compile Include="Events\ZiellagerBestandWurdeGeaendert.cs" />
     <Compile Include="Konzepte\Kunde.cs" />
-    <Compile Include="Konzepte\Produkt.cs" />
     <Compile Include="Konfiguration\CommandDispatcher.cs" />
     <Compile Include="Konfiguration\CommandDispatcher.Kunde.cs" />
-    <Compile Include="Konfiguration\CommandDispatcher.Produkt.cs" />
     <Compile Include="Model\Kunde.cs" />
-    <Compile Include="Model\Produkt.cs" />
     <Compile Include="Projektionen\Kunde.cs" />
-    <Compile Include="Projektionen\Produkt.cs" />
     <Compile Include="Projektionen\Readmodel.cs" />
     <Compile Include="Projektionen\Projektor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

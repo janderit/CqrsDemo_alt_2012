@@ -118,7 +118,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KundenController.cs" />
     <Compile Include="Controllers\LogController.cs" />
-    <Compile Include="Controllers\ProdukteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -190,12 +189,6 @@
     <Content Include="Views\Log\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Produkte\Bestellen.cshtml" />
-    <Content Include="Views\Produkte\Create.cshtml" />
-    <Content Include="Views\Produkte\Index.cshtml" />
-    <Content Include="Views\Produkte\Wareneingang.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
@@ -207,12 +200,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\_ViewStart.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Produkte\VerkaufspreisVorgeben.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Produkte\ZiellagerbestandDefinieren.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

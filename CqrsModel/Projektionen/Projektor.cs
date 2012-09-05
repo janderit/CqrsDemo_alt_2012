@@ -28,16 +28,7 @@ namespace CqrsModel.Projektionen
             _docstore = docstore;
         }
 
-        public IEnumerable<Produkt> Produkte {get
-        {
-            return _eventstore.All.OfType<Events.ProduktWurdeDefiniert>().Select(e => e.Source).Distinct()
-                    .Select(Produkt).ToList();
-        }}
-
-        public Produkt Produkt(Guid id)
-        {
-            return new Produkt(id, _eventstore.Get(id));
-        }
+       
 
         public IEnumerable<Kunde> Kunden
         {
