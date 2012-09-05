@@ -7,38 +7,27 @@ namespace CqrsModel.Cqrs
 {
     public static class EventSourcedRepository<TAggregat> where TAggregat:class, EventSourcedAggregate, new()
     {
-        public static TAggregat Get(Guid id, Action<Event>sub =null)
+
+        public static TAggregat Get(Guid id, Action<Event> publish, Action<Action> external, Action<Command> message)
         {
-            sub = sub ?? (e => { });
             var store = DiContainer.Current.Store;
             var events = store.Get(id);
 
             if (!events.Any()) return null;
 
             var aggregat = new TAggregat();
-            aggregat.SetHook(e =>
-                                 {
-                                     UnitOfWork.OnCommit(() => store.Store(e));
-                                     sub(e);
-                                 },
-                             UnitOfWork.OnCommit
-                );
+            aggregat.SetHook(publish, external, message);
             aggregat.SetHistory(id, events);
 
             return aggregat;
         }
 
-        public static TAggregat Create(Guid id)
+        public static TAggregat Create(Guid id, Action<Event> publish, Action<Action> external, Action<Command> message)
         {
             var store = DiContainer.Current.Store;
 
             var aggregat = new TAggregat();
-            aggregat.SetHook(e =>
-            {
-                UnitOfWork.OnCommit(() => store.Store(e));
-            },
-                             UnitOfWork.OnCommit
-                );
+            aggregat.SetHook(publish,external,message);
             aggregat.SetHistory(id, new List<Event>());
             return aggregat;
         }

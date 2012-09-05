@@ -12,9 +12,15 @@ namespace CqrsModel.Tests.Kunde
     {
 
         [Test, ExpectedException(typeof (ApplicationException))]
-        public void Neuer_Kunde_kann_nur_mit_Id_angelegt_werden()
+        public void Neuer_Kunde_kann_nicht_ohne_Id_angelegt_werden()
         {
-            When(new KundeErfassen {});
+            When(new KundeErfassen { Name = "Hans", Anschrift = "Strasse" });
+        }
+
+        [Test]
+        public void Neuer_Kunde_kann_mit_Id_angelegt_werden()
+        {
+            When(new KundeErfassen { KundeId=Guid.NewGuid(), Name="Hans", Anschrift="Strasse"});
         }
     }
 }

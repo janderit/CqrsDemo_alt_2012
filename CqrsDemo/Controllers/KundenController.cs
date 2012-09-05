@@ -16,7 +16,7 @@ namespace CqrsDemo.Controllers
 
         public ActionResult Create()
         {
-            return View(new KundeErfassen{});
+            return View(new KundeErfassen{KundeId=Guid.NewGuid()});
         }
 
         [HttpPost]

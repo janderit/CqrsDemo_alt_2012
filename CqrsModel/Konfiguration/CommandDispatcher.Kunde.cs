@@ -9,13 +9,13 @@ namespace CqrsModel.Konfiguration
         
         public void Dispatch(KundeErfassen cmd)
         {
-            EventSourcedRepository<Kunde>.Create(cmd.KundeId)
+            _repo.CreateEventSourced<Kunde>(cmd.KundeId)
                 .Erfassen(cmd.Name, cmd.Anschrift);
         }
 
         public void Dispatch(KundenAnschriftAendern cmd)
         {
-            EventSourcedRepository<Kunde>.Get(cmd.KundeId)
+            _repo.GetEventSourced<Kunde>(cmd.KundeId)
                 .AnschriftAendern(cmd.Anschrift);
         }
 

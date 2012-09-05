@@ -29,13 +29,20 @@ namespace CqrsDemo
 
             var estore = new EventStore();
             var dstore = new DocumentStore();
+
+            Action<Command> future = cmd => DiContainer.Current.CommandBus.Submit(cmd);
+
             DiContainer.Current = new DiContainer
-            {
-                Store = estore,
-                DocumentStore=dstore,
-                CommandBus = new CommandDispatcher(estore),
-                Projektor = new Projektor(estore,dstore)
-            };
+                                      {
+                                          Store = estore,
+                                          DocumentStore = dstore,
+                                          CommandBus = new CommandDispatcher(
+                                              estore,
+                                              e => estore.Store(e),
+                                              future
+                                              ),
+                                          Projektor = new Projektor(estore, dstore)
+                                      };
 
             if (!estore.All.Any()) GenerateDemoData(estore);
 

@@ -13,7 +13,7 @@ namespace CqrsModel.Tests.Warenwirtschaft
     [TestFixture]
     public class Warenbestellung : TestBase
     {
-/*
+
         [Test]
         public void Keine_Automatische_Bestellung_Ohne_Verkaufspreis()
         {
@@ -21,10 +21,11 @@ namespace CqrsModel.Tests.Warenwirtschaft
             var sutId = Guid.NewGuid();
 
             Given(
-                new ProduktWurdeDefiniert {ProduktId = sutId, Bezeichnung = "Testobst", ZielLagerbestand = 1000}
+                new ProduktWurdeDefiniert {ProduktId = sutId, Bezeichnung = "Testobst"},
+                new ZiellagerBestandWurdeGeaendert {ProduktId = sutId, Zielbestand = 1000}
                 );
 
-            When<Produkt>(sutId, sut => sut.PruefeNachbestellungen(20));
+            When<Produkt>(sutId, sut => sut.PruefeNachbestellungen());
 
             Events.Should().NotBeNull();
             Events.Should().BeEmpty();
@@ -38,18 +39,21 @@ namespace CqrsModel.Tests.Warenwirtschaft
             var sutId = Guid.NewGuid();
 
             Given(
-                new ProduktWurdeDefiniert {ProduktId = sutId, Bezeichnung = "Testobst", ZielLagerbestand = 1000},
+                new ProduktWurdeDefiniert {ProduktId = sutId, Bezeichnung = "Testobst"},
+                new ZiellagerBestandWurdeGeaendert {ProduktId = sutId, Zielbestand = 1000},
                 new VerkaufspreisWurdeFestgesetzt {ProduktId = sutId, Verkaufspreis = 50}
                 );
 
-            When<Produkt>(sutId, sut => sut.PruefeNachbestellungen(20));
+            When<Produkt>(sutId, sut => sut.PruefeNachbestellungen());
+            LoopMessages();
 
             Events.Should().NotBeNull();
             Events.Count().ShouldBeEquivalentTo(1);
             Events.Should().OnlyContain(e => e is BestellungBeiLieferantGetaetigt);
-            Events.OfType<BestellungBeiLieferantGetaetigt>().Single().ShouldBeEquivalentTo(new BestellungBeiLieferantGetaetigt {ProduktId = sutId, Menge = 1000, Einkaufspreis = 20});
+            Events.OfType<BestellungBeiLieferantGetaetigt>().Single().ShouldBeEquivalentTo(new BestellungBeiLieferantGetaetigt {ProduktId = sutId, Menge = 1000, Einkaufspreis = 0});
 
         }
-*/
+
+        
     }
 }

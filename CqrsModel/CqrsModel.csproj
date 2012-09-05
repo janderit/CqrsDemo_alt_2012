@@ -101,7 +101,6 @@
     <Compile Include="Model\Auftragsrepository.cs" />
     <Compile Include="Model\Auftragszeile.cs" />
     <Compile Include="Model\Kunde.cs" />
-    <Content Include="Model\Produkt.cs.txt" />
     <Compile Include="Model\Produkt.cs" />
     <Compile Include="Projektionen\AngenommenerAuftrag.cs" />
     <Compile Include="Projektionen\Auftrag.cs" />

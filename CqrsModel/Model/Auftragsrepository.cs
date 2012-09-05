@@ -8,10 +8,10 @@ namespace CqrsModel.Model
 {
     class Auftragsrepository
     {
-        public Auftrag Get(Guid id)
+        public Auftrag Get(Guid id, Repository repo)
         {
-            return (Auftrag)Repository.GetDocumentBased<Auftragsentwurf>(id) ??
-                   Repository.GetEventSourced<AngenommenerAuftrag>(id);
+            return (Auftrag)repo.GetDocumentBased<Auftragsentwurf>(id) ??
+                   repo.GetEventSourced<AngenommenerAuftrag>(id);
         }
     }
 }

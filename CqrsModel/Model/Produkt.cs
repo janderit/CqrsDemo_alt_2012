@@ -12,6 +12,8 @@ namespace CqrsModel.Model
     {
         private int? Verkaufspreis { get { return Konzepte.Produkt.Verkaufspreis(Historie); } }
         private int Bestand { get { return Konzepte.Produkt.Bestand(Historie); } }
+        private int Zielbestand { get { return Konzepte.Produkt.Zielbestand(Historie); } }
+        private int OffeneBestellungen { get { return Konzepte.Produkt.OffeneBestellungen(Historie); } }
         private string Bezeichnung { get { return Konzepte.Produkt.Bezeichnung(Historie); } }
 
         public void Definieren(string bezeichnung, int zielbestand)
@@ -34,11 +36,13 @@ namespace CqrsModel.Model
         public void VerkaufspreisVorgeben(int verkaufspreis)
         {
             Publish(new VerkaufspreisWurdeFestgesetzt{ProduktId=Id, Verkaufspreis=verkaufspreis});
+            PruefeNachbestellungen();
         }
 
         public void ZiellagerbestandDefinieren(int zielbestand)
         {
             Publish(new ZiellagerBestandWurdeGeaendert {ProduktId = Id, Zielbestand = zielbestand});
+            PruefeNachbestellungen();
         }
 
 
@@ -61,7 +65,17 @@ namespace CqrsModel.Model
                 Seiteneffekt(()=>new Disponent().Disponiere(Bezeichnung, menge, anschrift));
                 Publish(new ProduktWurdeAusgeliefert {Anschrift=anschrift, AuftragId=auftrag, Menge=menge, ProduktId=Id, Verkaufspreis=vk});
                 bestaetigung(menge);
+                PruefeNachbestellungen();
             } else throw new ApplicationException("Menge nicht verfügbar");
+        }
+
+        public void PruefeNachbestellungen()
+        {
+            var delta = Bestand + OffeneBestellungen - Zielbestand;
+            if (delta<0)
+            {
+                Message(new Commands.WarenlieferungBestellen {ProduktId = Id, Menge = -delta});
+            }
         }
     }
 }

@@ -10,7 +10,7 @@ namespace CqrsModel.Commands
     {
         public KundeErfassen()
         {
-            KundeId = Guid.NewGuid();
+            //KundeId = Guid.NewGuid();
         }
 
         public Guid KundeId { get; set; }

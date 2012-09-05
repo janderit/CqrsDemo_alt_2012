@@ -5,9 +5,22 @@ using System.Text;
 
 namespace CqrsModel.Cqrs
 {
-    public static class Repository
+    public class Repository
     {
-        private static T TryGetFromCacheOrCache<T>(Guid id, Func<T> fallback) where T : class
+
+        private readonly Action<Event> _publish;
+        private readonly Action<Action> _external;
+        private readonly Action<Command> _message;
+
+        public  Repository(Action<Event> publish, Action<Action> external, Action<Command> message)
+        {
+            _publish = publish;
+            _external = external;
+            _message = message;
+        }
+
+
+        private T TryGetFromCacheOrCache<T>(Guid id, Func<T> fallback) where T : class
         {
             if (UnitOfWork.CacheHas(id))
             {
@@ -19,27 +32,27 @@ namespace CqrsModel.Cqrs
             return t;
         }
 
-        public static T CreateEventSourced<T>(Guid id) where T : class,EventSourcedAggregate, new()
+        public T CreateEventSourced<T>(Guid id) where T : class,EventSourcedAggregate, new()
         {
-            return TryGetFromCacheOrCache<T>(id, ()=>EventSourcedRepository<T>.Create(id));
+            return TryGetFromCacheOrCache<T>(id, ()=>EventSourcedRepository<T>.Create(id, _publish, _external, _message));
         }
 
-        public static T CreateDocumentBased<T>(Guid id) where T : class,DocumentBasedAggregate, new()
+        public T CreateDocumentBased<T>(Guid id) where T : class,DocumentBasedAggregate, new()
         {
             return TryGetFromCacheOrCache<T>(id, () => DocumentBasedRepository<T>.Create(id));
         }
 
-        public static T GetEventSourced<T>(Guid id) where T : class,EventSourcedAggregate, new()
+        public T GetEventSourced<T>(Guid id) where T : class,EventSourcedAggregate, new()
         {
-            return TryGetFromCacheOrCache<T>(id, () => EventSourcedRepository<T>.Get(id));
+            return TryGetFromCacheOrCache<T>(id, () => EventSourcedRepository<T>.Get(id, _publish, _external, _message));
         }
 
-        public static T GetDocumentBased<T>(Guid id) where T : class,DocumentBasedAggregate, new()
+        public T GetDocumentBased<T>(Guid id) where T : class,DocumentBasedAggregate, new()
         {
             return TryGetFromCacheOrCache<T>(id, () => DocumentBasedRepository<T>.Get(id));
         }
 
-        public static void DeleteDocumentBased<T>(Guid id) where T : class,DocumentBasedAggregate, new()
+        public void DeleteDocumentBased<T>(Guid id) where T : class,DocumentBasedAggregate, new()
         {
             DocumentBasedRepository<T>.Delete(id);
         }

@@ -8,21 +8,25 @@ namespace CqrsModel.Konfiguration
     public partial class CommandDispatcher
     {
         private readonly EventStore _store;
+        private Repository _repo;
 
-        public CommandDispatcher(EventStore store)
+        public CommandDispatcher(EventStore store, Action<Event> publish, Action<Command> message)
         {
             _store = store;
+            _repo = new Repository(
+                e => UnitOfWork.OnCommit(() => publish(e)),
+                UnitOfWork.OnCommit,
+                m => UnitOfWork.OnCommit(() => message(m))
+                );
         }
 
-        public IEnumerable<Event> Submit(Command command)
+        public void Submit(Command command)
         {
             try
             {
                 UnitOfWork.Start();
-
                 Dispatch((dynamic)command);
-
-                return UnitOfWork.Commit().ToList();
+                UnitOfWork.Commit();
             }
             catch (Exception ex)
             {
