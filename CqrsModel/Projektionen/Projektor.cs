@@ -48,32 +48,7 @@ namespace CqrsModel.Projektionen
             }
         }
 
-        public Auftrag Auftrag(Guid id)
-        {
-            var auftrag = (_docstore.Has(id))
-                              ? (Auftrag) new Auftragsentwurf(id, Produkt)
-                              : new AngenommenerAuftrag(id, _eventstore.Get(id), Produkt);
-
-            
-            auftrag.Kunde = Kunde(auftrag.KundeId);
-
-            return auftrag;
-        }
-
-
-        public IEnumerable<Auftrag> Auftraege
-        {
-            get
-            {
-                var entwuerfe = _docstore.GetForType(typeof(Model.Auftragsentwurf).Name);
-                var auftraege = _eventstore.All.OfType<AuftragWurdeAngenommen>().Select(_ => _.Source);
-
-                return entwuerfe.Union(auftraege)
-                    .Distinct()
-                    .Select(Auftrag)
-                    .ToList();
-            }
-        }
+       
 
         public Kunde Kunde(Guid id)
         {

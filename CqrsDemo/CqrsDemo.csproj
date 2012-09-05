@@ -115,7 +115,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\AuftraegeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KundenController.cs" />
     <Compile Include="Controllers\LogController.cs" />
@@ -173,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Shared\DisplayTemplates\" />
     <Folder Include="Views\Shared\EditorTemplates\" />
   </ItemGroup>
   <ItemGroup>
@@ -209,31 +209,10 @@
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Auftraege\Edit.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Auftraege\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Auftraege\EditAuftragsdaten.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Auftraege\NeueZeile.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Shared\DisplayTemplates\Auftragszeile.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Produkte\VerkaufspreisVorgeben.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Produkte\ZiellagerbestandDefinieren.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Auftraege\Annehmen.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Auftraege\Disponieren.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

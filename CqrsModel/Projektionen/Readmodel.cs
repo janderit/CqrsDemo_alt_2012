@@ -13,7 +13,6 @@ namespace CqrsModel.Projektionen
         public static IEnumerable<Kunde> Kunden { get { return DiContainer.Current.Projektor.Kunden; } }
         public static Kunde Kunde(Guid id) { return DiContainer.Current.Projektor.Kunde(id); }
 
-        public static IEnumerable<Auftrag> Auftraege { get { return DiContainer.Current.Projektor.Auftraege; } }
-        public static Auftrag Auftrag(Guid id) { return DiContainer.Current.Projektor.Auftrag(id); }
+       
     }
 }
