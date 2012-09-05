@@ -5,7 +5,7 @@ using CqrsModel.Cqrs;
 
 namespace CqrsModel.Model
 {
-    public class Auftragsentwurf : DocumentBasedAggregate, Auftrag
+    public class Auftragsentwurf : DocumentBasedAggregate
     {
         public Guid Id { get; set; }
         public Guid KundeId { get; set; }

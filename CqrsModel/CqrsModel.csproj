@@ -91,14 +91,12 @@
     <Compile Include="Konzepte\Auftrag.cs" />
     <Compile Include="Konzepte\Kunde.cs" />
     <Compile Include="Konzepte\Produkt.cs" />
-    <Compile Include="Model\Auftrag.cs" />
     <Compile Include="Model\Auftragsentwurf.cs" />
     <Compile Include="Konfiguration\CommandDispatcher.cs" />
     <Compile Include="Konfiguration\CommandDispatcher.Kunde.cs" />
     <Compile Include="Konfiguration\CommandDispatcher.Produkt.cs" />
     <Compile Include="Konfiguration\CommandDispatcher.Auftrag.cs" />
     <Compile Include="Model\AngenommenerAuftrag.cs" />
-    <Compile Include="Model\Auftragsrepository.cs" />
     <Compile Include="Model\Auftragszeile.cs" />
     <Compile Include="Model\Kunde.cs" />
     <Compile Include="Model\Produkt.cs" />
@@ -114,7 +112,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\Kunde\Kundenverwaltung.cs" />
     <Compile Include="Tests\TestBase.cs" />
-    <Compile Include="Tests\Warenwirtschaft\Warenbestellung.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dispositionsschnittstelle\Dispositionsschnittstelle.csproj">

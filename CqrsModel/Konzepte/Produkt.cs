@@ -18,29 +18,19 @@ namespace CqrsModel.Konzepte
             return history.OfType<Events.ProduktWurdeDefiniert>().Select(_ => _.Bezeichnung).LastOrDefault() ?? "";
         }
 
-        public static int Ziellagerbestand(IEnumerable<Event> history)
-        {
-            return history.OfType<Events.ZiellagerBestandWurdeGeaendert>().Select(_ => (int?) _.Zielbestand).LastOrDefault() ?? 0;
-        }
-
-        public static int Bestand(IEnumerable<Event> history)
+       public static int Bestand(IEnumerable<Event> history)
         {
             return
                 history.OfType<Events.WarenlieferungGingEin>().Sum(_ => _.Menge)
                 - history.OfType<Events.ProduktWurdeAusgeliefert>().Sum(_ => _.Menge);
         }
 
-        public static int Zielbestand(IEnumerable<Event> history)
+        public static int Ziellagerbestand(IEnumerable<Event> history)
         {
             return
                 history.OfType<Events.ZiellagerBestandWurdeGeaendert>().Select(_ => _.Zielbestand).LastOrDefault();
         }
 
-        public static int OffeneBestellungen(IEnumerable<Event> history)
-        {
-            return
-                history.OfType<Events.BestellungBeiLieferantGetaetigt>().Sum(_ => _.Menge)
-                - history.OfType<Events.WarenlieferungGingEin>().Sum(_ => _.Menge);
-        }
+        
     }
 }

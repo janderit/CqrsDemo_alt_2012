@@ -7,7 +7,7 @@ using CqrsModel.Events;
 
 namespace CqrsModel.Model
 {
-    class AngenommenerAuftrag : AggregateBase, Auftrag
+    class AngenommenerAuftrag : AggregateBase
     {
 
         public void Annehmen(Auftragsentwurf entwurf, Func<Guid, Produkt> produktrepository)
