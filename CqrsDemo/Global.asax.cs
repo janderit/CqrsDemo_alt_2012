@@ -8,9 +8,7 @@ using System.Web.Routing;
 using CqrsDemo.App_Start;
 using CqrsModel;
 using CqrsModel.Cqrs;
-using CqrsModel.Events;
 using CqrsModel.Konfiguration;
-using CqrsModel.Model;
 using CqrsModel.Projektionen;
 
 namespace CqrsDemo  
@@ -50,14 +48,8 @@ namespace CqrsDemo
 
         private void GenerateDemoData(EventStore store)
         {
-            store.Store(Kunde(Guid.NewGuid(), "Mustermann, Hans", "Bergstrasse 10, 91000 Allgäu"));
-            store.Store(Kunde(Guid.NewGuid(), "Müller, Maria", "Dorfplatz 1, 64001 Bergstraße"));
         }
 
-        private IEnumerable<Event> Kunde(Guid id, string name, string anschrift)
-        {
-            yield return new KundeWurdeErfasst {KundeId = id, Name = name, Anschrift = anschrift};
-        }
 
         
 

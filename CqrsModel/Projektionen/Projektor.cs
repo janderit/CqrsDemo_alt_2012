@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using CqrsModel.Cqrs;
-using CqrsModel.Events;
 
 namespace CqrsModel.Projektionen
 {
@@ -30,21 +29,7 @@ namespace CqrsModel.Projektionen
 
        
 
-        public IEnumerable<Kunde> Kunden
-        {
-            get
-            {
-                return _eventstore.All.OfType<Events.KundeWurdeErfasst>().Select(e => e.Source).Distinct()
-                    .Select(Kunde).ToList();
-            }
-        }
-
-       
-
-        public Kunde Kunde(Guid id)
-        {
-            return new Kunde(id, _eventstore.Get(id));
-        }
+        
 
 
     }

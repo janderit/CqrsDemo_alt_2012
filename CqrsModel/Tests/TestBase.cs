@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Linq;
 using CqrsModel.Cqrs;
 using CqrsModel.Konfiguration;
-using CqrsModel.Model;
 using NUnit.Framework;
 
 namespace CqrsModel.Tests

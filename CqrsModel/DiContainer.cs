@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using CqrsModel.Cqrs;
 using CqrsModel.Konfiguration;
-using CqrsModel.Model;
 using CqrsModel.Projektionen;
 
 namespace CqrsModel

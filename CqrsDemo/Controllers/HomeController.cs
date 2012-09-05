@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Web.Mvc;
 using CqrsModel;
-using CqrsModel.Events;
 
 namespace CqrsDemo.Controllers
 {
